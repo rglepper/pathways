@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import {MdToolbarModule, MdCardModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { EscherComponent } from './escher/escher.component';
@@ -18,7 +19,9 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MdToolbarModule,
+    MdCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

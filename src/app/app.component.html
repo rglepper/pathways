@@ -1,2 +1,6 @@
-<app-upload-file (onFileLoaded)="onFileLoaded($event)"></app-upload-file>
-<app-escher *ngIf="file" [mapData]="file"></app-escher>
+<md-toolbar>
+    <app-upload-file (onFileLoaded)="onFileLoaded($event)"></app-upload-file>
+</md-toolbar>
+<div>
+  <app-escher *ngIf="file" [mapData]="file"></app-escher>
+</div>
