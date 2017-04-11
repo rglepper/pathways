@@ -1,0 +1,7 @@
+.escher-container {
+    min-height: 500px;
+}
+.app-escher-component {
+    height: 600px;
+    overflow: hidden;
+}
