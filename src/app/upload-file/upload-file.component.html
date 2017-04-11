@@ -1,1 +1,12 @@
-<input #fileInput type='file' (change)="fileChanged($event)">
+<label for="fileInput" #fileInputLabel>
+    <button md-fab (click)="fileInputLabel.click()">
+        <md-icon role="img" class="material-icons mat-icon" aria-label="file upload">file_upload</md-icon>
+    </button>
+    <span *ngIf="fileName;else uploadText">
+        Loaded file {{fileName}}
+    </span>
+    <ng-template #uploadText>
+        Upload pathway map
+    </ng-template>
+</label>
+<input id="fileInput" type='file' style="display: none" (change)="fileChanged($event)">

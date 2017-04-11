@@ -5,13 +5,13 @@ import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, OnChang
   templateUrl: './upload-file.component.html'
 })
 export class UploadFileComponent {
-  @ViewChild('fileInput') myFileInput: ElementRef;
   @Output() onFileLoaded = new EventEmitter<object>();
-
+  fileName: string;
   constructor() {
   }
 
   fileChanged(event) {
+    this.fileName = event.target.files[0].name;
     this.onFileLoaded.emit(event);
   }
 }
