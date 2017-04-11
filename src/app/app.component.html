@@ -1,3 +1,2 @@
-<h1>
-  {{title}}
-</h1>
+<app-upload-file (onFileLoaded)="onFileLoaded($event)"></app-upload-file>
+<app-escher *ngIf="file" [mapData]="file"></app-escher>

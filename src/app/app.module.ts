@@ -3,11 +3,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+
 import { AppComponent } from './app.component';
+import { EscherComponent } from './escher/escher.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EscherComponent,
+    UploadFileComponent
   ],
   imports: [
     BrowserModule,
@@ -17,4 +23,4 @@ import { AppComponent } from './app.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
