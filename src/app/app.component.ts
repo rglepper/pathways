@@ -35,14 +35,6 @@ export class AppComponent {
         reader.readAsText(file);
     }
   onPathClicked(event) {
-    console.log(this.file);
-   const fromNode = _.find(this.file[1].nodes, ['node_id', event['from_node_id']]);
-   const toNode = _.find(this.file[1].nodes, ['node_id', event['to_node_id']]);
-
-    this.selectedPath = {
-      'fromNode': fromNode.name || fromNode.node_id ,
-      'toNode': toNode.name || toNode.node_id
-    };
-
+    this.selectedPath = event;
   }
 }

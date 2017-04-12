@@ -1,6 +1,7 @@
 import { Component, Input, Output, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, EventEmitter } from '@angular/core';
 import * as escher from 'escher-vis';
 import * as $ from 'jquery';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-escher',
@@ -30,7 +31,14 @@ selection: any;
   ngAfterViewInit() {
     this.builder = escher.Builder(this.mapData, this.modelData, this.embeddedCss, this.pathwayEl.nativeElement, this.options);
     this.builder.selection.selectAll('.segment').on('click', (d) => {
-      this.path.emit(d);
+
+      const fromNode = _.find(this.builder.map.nodes, ['node_id', d['from_node_id']]);
+      const toNode = _.find(this.builder.map.nodes, ['node_id', d['to_node_id']]);
+      const nodes = {
+                      'fromNode': fromNode.name || fromNode.node_id,
+                      'toNode': toNode.name || toNode.node_id
+                    };
+      this.path.emit(nodes);
     });
   }
   toggleStyles() {
