@@ -10,3 +10,9 @@
     <li *ngFor="let node of nodes"><b>{{node.nodeType }}</b> {{node.size}}</li>
   </ul>
 </div>
+<div *ngIf="genes.length > 0">
+  <h3>Genes that are part of more than one reaction</h3>
+  <ul >
+    <li *ngFor="let gene of genes"><b>{{gene.name}}</b> is part of {{gene.count}} reactions</li>
+  </ul>
+</div>
