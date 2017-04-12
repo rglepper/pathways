@@ -4,3 +4,9 @@
 <div>
   <app-escher *ngIf="file" [mapData]="file"></app-escher>
 </div>
+<div *ngIf="nodes.length > 0">
+  <h3>Nodes for each node_type</h3>
+  <ul >
+    <li *ngFor="let node of nodes"><b>{{node.nodeType }}</b> {{node.size}}</li>
+  </ul>
+</div>
