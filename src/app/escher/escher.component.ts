@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, EventEmitter } from '@angular/core';
 import * as escher from 'escher-vis';
 import * as $ from 'jquery';
 
@@ -16,6 +16,7 @@ export class EscherComponent implements AfterViewInit {
 builder;
 green = false;
 selection: any;
+
   @Input() mapData: object;
   @Input() modelData: object = null;
   @Input() embeddedCss: string = null;
@@ -24,8 +25,13 @@ selection: any;
     fill_screen: false
     };
 
+  @Output() path: EventEmitter<object> = new EventEmitter();
+
   ngAfterViewInit() {
     this.builder = escher.Builder(this.mapData, this.modelData, this.embeddedCss, this.pathwayEl.nativeElement, this.options);
+    this.builder.selection.selectAll('.segment').on('click', (d) => {
+      this.path.emit(d);
+    });
   }
   toggleStyles() {
     this.green = !this.green;

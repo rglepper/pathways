@@ -1,8 +1,10 @@
 <md-toolbar>
     <app-upload-file (onFileLoaded)="onFileLoaded($event)"></app-upload-file>
+
 </md-toolbar>
+<p *ngIf="selectedPath">From: {{selectedPath.fromNode}}, To: {{selectedPath.toNode}}</p>
 <div>
-  <app-escher *ngIf="file" [mapData]="file"></app-escher>
+  <app-escher *ngIf="file" [mapData]="file" (path)="onPathClicked($event)"></app-escher>
 </div>
 <div *ngIf="nodes.length > 0">
   <h3>Nodes for each node_type</h3>
