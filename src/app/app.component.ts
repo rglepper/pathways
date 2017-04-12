@@ -18,9 +18,10 @@ export class AppComponent {
         const reader = new FileReader();
         reader.onload = (event) => {
           this.file = JSON.parse(reader.result);
-          this.nodes = _.map(_.groupBy(this.file[1].nodes, 'node_type'), (nodes, type) => {
-            return { 'nodeType': type, 'size': nodes.length };
-          });
+          this.nodes = _(this.file[1].nodes)
+                      .groupBy('node_type')
+                      .map((nodes, type) => ({'nodeType': type, 'size': nodes.length}))
+                      .value();
         };
         reader.readAsText(file);
     }
