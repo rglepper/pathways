@@ -39,7 +39,7 @@ selection: any;
                       'toNode': toNode.name || toNode.node_id
                     };
       this.path.emit(nodes);
-    });
+    }).style('cursor', 'pointer');
   }
   toggleStyles() {
     this.green = !this.green;
