@@ -12,29 +12,37 @@ export class AppComponent {
   selectedPath: object;
 
   onFileLoaded(event) {
-    this.readJSON(event.target.files[0]);
+    this.readJSON(event.target.files[0], (data) => {
+      this.file = data;
+      this.nodesList(data[1]);
+      this.genesList(data[1]);
+    });
   }
 
-  readJSON(file) {
+  readJSON(file, cb) {
         const reader = new FileReader();
         reader.onload = (event) => {
-          this.file = JSON.parse(reader.result);
-          this.nodes = _(this.file[1].nodes)
-                      .groupBy('node_type')
-                      .map((nodes, type) => ({'nodeType': type, 'size': nodes.length}))
-                      .value();
-          this.genes = _(this.file[1].reactions)
-                      .map(reaction => reaction.genes)
-                      .flattenDeep()
-                      .countBy('name')
-                      .map((count, name) => ( count > 1 ? { name: name, count: count } : false))
-                      .reject(o => !o)
-                      .value();
-
+          const data = JSON.parse(reader.result);
+          cb(data);
         };
         reader.readAsText(file);
     }
   onPathClicked(event) {
     this.selectedPath = event;
+  }
+  nodesList(data) {
+      this.nodes = _(data.nodes)
+                  .groupBy('node_type')
+                  .map((nodes, type) => ({'nodeType': type, 'size': nodes.length}))
+                  .value();
+  }
+  genesList(data) {
+      this.genes =  _(data.reactions)
+                  .map(reaction => reaction.genes)
+                  .flattenDeep()
+                  .countBy('name')
+                  .map((count, name) => ( count > 1 && name !== 'None' ? { name: name, count: count } : false))
+                  .reject(o => !o)
+                  .value();
   }
 }
