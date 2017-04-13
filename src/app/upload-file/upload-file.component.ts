@@ -11,7 +11,11 @@ export class UploadFileComponent {
   }
 
   fileChanged(event) {
-    this.fileName = event.target.files[0].name;
-    this.onFileLoaded.emit(event);
+    if (event.target.files[0].type === 'application/json') {
+      this.fileName = event.target.files[0].name;
+      this.onFileLoaded.emit(event);
+    } else {
+      alert('File needs to be json');
+    }
   }
 }
